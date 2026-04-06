@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-инструменты: курсы для команды — red_mad_robot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #FF3D00;
+  --red-hover: #FF5722;
+  --red-dim: rgba(255, 61, 0, 0.12);
+  --bg: #0A0A0A;
+  --bg-card: #141414;
+  --bg-card-hover: #1A1A1A;
+  --bg-tag: #1E1E1E;
+  --text: #FFFFFF;
+  --text-secondary: #999999;
+  --text-dim: #666666;
+  --border: #222222;
+  --green: #00C853;
+  --yellow: #FFD600;
+  --blue: #448AFF;
+  --purple: #B388FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+}
+
+.hero__label::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+}
+
+.hero__title {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.hero__title span {
+  color: var(--red);
+}
+
+.hero__subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.7;
+}
+
+/* ── Stats bar ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat {
+  background: var(--bg);
+  padding: 32px;
+  text-align: center;
+}
+
+.stat__number {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat__label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Filter ── */
+.filter-section {
+  padding: 40px 0 20px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg-tag);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: rgba(255, 61, 0, 0.2);
+  touch-action: manipulation;
+  min-height: 44px;
+  user-select: none;
+}
+
+.filter-btn:hover {
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+
+/* active state handled by :checked CSS selectors */
+
+/* ── Course cards ── */
+.courses {
+  padding: 20px 0 80px;
+  display: grid;
+  gap: 16px;
+}
+
+.course-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.25s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  background: var(--bg-card-hover);
+  border-color: #333;
+  transform: translateY(-2px);
+}
+
+.course-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.course-card__rank {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--border);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.course-card__rank.top3 {
+  color: var(--red-dim);
+}
+
+.course-card__meta {
+  flex: 1;
+}
+
+.course-card__name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.course-card__name a {
+  color: var(--text);
+  text-decoration: none;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.course-card__name a:hover {
+  color: var(--red);
+}
+
+.course-card__score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--red-dim);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.course-card__desc {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.course-card__why {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #ccc;
+  margin-bottom: 20px;
+  padding-left: 16px;
+  border-left: 2px solid var(--red);
+}
+
+.course-card__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tag--tool {
+  background: rgba(68, 138, 255, 0.12);
+  color: var(--blue);
+}
+
+.tag--role {
+  background: rgba(179, 136, 255, 0.12);
+  color: var(--purple);
+}
+
+.tag--format {
+  background: rgba(0, 200, 83, 0.12);
+  color: var(--green);
+}
+
+.tag--lang {
+  background: rgba(255, 214, 0, 0.12);
+  color: var(--yellow);
+}
+
+.course-card__stats {
+  display: flex;
+  gap: 12px 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+}
+
+.course-card__stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.course-card__pros {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .course-card__pros {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pro, .con {
+  font-size: 13px;
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+
+.pro { color: #aaa; }
+.con { color: #888; }
+
+.pro::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.con::before {
+  content: '!';
+  position: absolute;
+  left: 2px;
+  color: var(--yellow);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* ── Matrix ── */
+.matrix-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.section-title span {
+  color: var(--red);
+}
+
+.matrix-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 700px;
+}
+
+.matrix th {
+  background: var(--bg-card);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+}
+
+.matrix td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-secondary);
+}
+
+.matrix tr:hover td {
+  background: var(--bg-card);
+}
+
+.matrix td:first-child {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.matrix .has-course {
+  color: var(--green);
+}
+
+.matrix .has-partial {
+  color: var(--yellow);
+}
+
+.matrix .has-none {
+  color: #333;
+}
+
+/* ── No-license section ── */
+.nolicense-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+
+.nolicense-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 12px;
+}
+
+.nolicense-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.nolicense-card__name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.nolicense-card__name a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nolicense-card__name a:hover {
+  color: var(--red);
+}
+
+.nolicense-card__note {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* ── Landscape ── */
+.landscape-section {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+
+.landscape-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+  gap: 16px;
+}
+
+.insight-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.insight-card__title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.insight-card__text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.footer a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .hero { padding: 48px 0 32px; }
+  .hero__subtitle { font-size: 16px; }
+  .course-card { padding: 20px; }
+  .course-card__header { flex-direction: column; gap: 12px; }
+  .course-card__rank { font-size: 28px; min-width: auto; }
+  .course-card__name { font-size: 16px; }
+  .course-card__desc { font-size: 14px; }
+  .course-card__why { font-size: 13px; }
+  .course-card__score-badge { align-self: flex-start; }
+  .stat { padding: 20px 12px; }
+  .stat__number { font-size: 28px; }
+  .stat__label { font-size: 11px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .filter-row { gap: 6px; }
+  .filter-btn { padding: 10px 16px; font-size: 13px; }
+  .filter-section { padding: 24px 0 12px; }
+  .section-title { font-size: 22px; }
+  .matrix-section, .nolicense-section, .landscape-section { padding: 40px 0; }
+  .tag { font-size: 11px; padding: 3px 10px; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 12px; }
+  .hero { padding: 32px 0 24px; }
+  .course-card { padding: 16px; border-radius: 12px; }
+  .course-card__name { font-size: 15px; }
+  .filter-btn { padding: 10px 14px; font-size: 12px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat__number { font-size: 24px; }
+  .stat__label { font-size: 10px; }
+  .nolicense-card { padding: 16px; }
+  .insight-card { padding: 16px; }
+}
+
+/* ── CSS-only filter (no JS needed) ── */
+.filter-input { display: none; }
+
+.filter-btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Active label highlight */
+#f-all:checked ~ .filter-section label[for="f-all"],
+#f-role-dev:checked ~ .filter-section label[for="f-role-dev"],
+#f-role-pm:checked ~ .filter-section label[for="f-role-pm"],
+#f-role-marketing:checked ~ .filter-section label[for="f-role-marketing"],
+#f-role-design:checked ~ .filter-section label[for="f-role-design"],
+#f-role-clevel:checked ~ .filter-section label[for="f-role-clevel"],
+#f-tool-claude:checked ~ .filter-section label[for="f-tool-claude"],
+#f-tool-copilot:checked ~ .filter-section label[for="f-tool-copilot"],
+#f-tool-cursor:checked ~ .filter-section label[for="f-tool-cursor"] {
+  background: var(--red) !important;
+  border-color: var(--red) !important;
+  color: #fff !important;
+}
+
+/* Show all when "all" checked (default) */
+#f-all:checked ~ .courses .course-card { display: block; }
+
+/* Role filters: hide all, show matching */
+#f-role-dev:checked ~ .courses .course-card { display: none; }
+#f-role-dev:checked ~ .courses [data-roles~="role-dev"] { display: block; }
+
+#f-role-pm:checked ~ .courses .course-card { display: none; }
+#f-role-pm:checked ~ .courses [data-roles~="role-pm"] { display: block; }
+
+#f-role-marketing:checked ~ .courses .course-card { display: none; }
+#f-role-marketing:checked ~ .courses [data-roles~="role-marketing"] { display: block; }
+
+#f-role-design:checked ~ .courses .course-card { display: none; }
+#f-role-design:checked ~ .courses [data-roles~="role-design"] { display: block; }
+
+#f-role-clevel:checked ~ .courses .course-card { display: none; }
+#f-role-clevel:checked ~ .courses [data-roles~="role-clevel"] { display: block; }
+
+/* Tool filters: hide all, show matching */
+#f-tool-claude:checked ~ .courses .course-card { display: none; }
+#f-tool-claude:checked ~ .courses [data-tools~="tool-claude"] { display: block; }
+
+#f-tool-copilot:checked ~ .courses .course-card { display: none; }
+#f-tool-copilot:checked ~ .courses [data-tools~="tool-copilot"] { display: block; }
+
+#f-tool-cursor:checked ~ .courses .course-card { display: none; }
+#f-tool-cursor:checked ~ .courses [data-tools~="tool-cursor"] { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__label">red_mad_robot · обучение</div>
+    <h1 class="hero__title">AI-инструменты<br>для <span>каждой роли</span></h1>
+    <p class="hero__subtitle">Подборка лучших open-source курсов по Claude Code, GitHub Copilot, Cursor и другим AI-инструментам. Выбери свою роль — найди свой курс. Все ссылки ведут на GitHub, всё бесплатно.</p>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat__number">13</div>
+    <div class="stat__label">курсов</div>
+  </div>
+  <div class="stat">
+    <div class="stat__number">5</div>
+    <div class="stat__label">инструментов</div>
+  </div>
+  <div class="stat">
+    <div class="stat__number">6</div>
+    <div class="stat__label">ролей</div>
+  </div>
+  <div class="stat">
+    <div class="stat__number">11</div>
+    <div class="stat__label">бонус без лицензии</div>
+  </div>
+</div>
+
+<!-- Filterable wrapper: radio inputs + filters + cards must be siblings -->
+<div class="filterable">
+
+<!-- Hidden radio inputs (CSS-only, no JS) -->
+<input type="radio" name="filter" id="f-all" class="filter-input" checked>
+<input type="radio" name="filter" id="f-role-dev" class="filter-input">
+<input type="radio" name="filter" id="f-role-pm" class="filter-input">
+<input type="radio" name="filter" id="f-role-marketing" class="filter-input">
+<input type="radio" name="filter" id="f-role-design" class="filter-input">
+<input type="radio" name="filter" id="f-role-clevel" class="filter-input">
+<input type="radio" name="filter" id="f-tool-claude" class="filter-input">
+<input type="radio" name="filter" id="f-tool-copilot" class="filter-input">
+<input type="radio" name="filter" id="f-tool-cursor" class="filter-input">
+
+<!-- Filters -->
+<section class="filter-section">
+  <div class="container">
+    <div class="filter-row">
+      <label for="f-all" class="filter-btn">Все</label>
+      <label for="f-role-dev" class="filter-btn">Разработчики</label>
+      <label for="f-role-pm" class="filter-btn">Продакт-менеджеры</label>
+      <label for="f-role-marketing" class="filter-btn">Маркетологи</label>
+      <label for="f-role-design" class="filter-btn">Дизайнеры</label>
+      <label for="f-role-clevel" class="filter-btn">C-level</label>
+      <label for="f-tool-claude" class="filter-btn">Claude Code</label>
+      <label for="f-tool-copilot" class="filter-btn">GitHub Copilot</label>
+      <label for="f-tool-cursor" class="filter-btn">Cursor</label>
+    </div>
+  </div>
+</section>
+
+<!-- Course Cards -->
+<section class="courses">
+  <div class="container">
+
+    <!-- #1 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-copilot">
+      <div class="course-card__header">
+        <div class="course-card__rank top3">01</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/microsoft/Mastering-GitHub-Copilot-for-Paired-Programming" target="_blank">microsoft/Mastering-GitHub-Copilot-for-Paired-Programming</a>
+          </div>
+          <div class="course-card__desc">Многомодульный 10-часовой курс от Microsoft. От первых шагов до Agent Mode, MCP, Copilot CLI и Data Science.</div>
+        </div>
+        <div class="course-card__score-badge">83.6</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">GitHub Copilot</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--role">Data Scientists</span>
+        <span class="tag tag--format">Курс с уроками</span>
+        <span class="tag tag--lang">Python · JS · C# · SQL</span>
+      </div>
+      <div class="course-card__why">14+ пронумерованных занятий по трём уровням (Beginner → Advanced). Покрывает Agent Mode и MCP — самые актуальные направления 2026 года. Единственный полноценный курс по GitHub Copilot.</div>
+      <div class="course-card__stats">
+        <span>★ 7 618</span>
+        <span>👥 24</span>
+        <span>📝 153 commits/год</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Microsoft — корпоративный стандарт качества</div>
+        <div class="pro">Полный путь от новичка до продвинутого</div>
+        <div class="con">Только для разработчиков, нет пути для PM/маркетологов</div>
+        <div class="con">Нужна подписка GitHub Copilot</div>
+      </div>
+    </div>
+
+    <!-- #2 -->
+    <div class="course-card" data-roles="role-pm" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank top3">02</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/carlvellotti/claude-code-pm-course" target="_blank">carlvellotti/claude-code-pm-course</a>
+          </div>
+          <div class="course-card__desc">Интерактивный курс Claude Code специально для продакт-менеджеров. 10 уроков в 2 модулях.</div>
+        </div>
+        <div class="course-card__score-badge">74.2</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Продакт-менеджеры</span>
+        <span class="tag tag--format">Интерактивный курс</span>
+      </div>
+      <div class="course-card__why">Курс проходится прямо внутри Claude Code через slash-команды (/start-1-1, /start-2-1). PM-сценарии: PRD, анализ данных, продуктовая стратегия, работа с агентами. Золотой стандарт формата.</div>
+      <div class="course-card__stats">
+        <span>★ 1 634</span>
+        <span>👥 6</span>
+        <span>📄 CC BY-NC-ND 4.0</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Обучение внутри самого инструмента — не отдельный сайт</div>
+        <div class="pro">Единственный курс специально для PM</div>
+        <div class="con">Лицензия запрещает производные работы и коммерческое использование</div>
+        <div class="con">Только Claude Code, нет других инструментов</div>
+      </div>
+    </div>
+
+    <!-- #3 -->
+    <div class="course-card" data-roles="role-dev role-pm role-design role-clevel" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank top3">03</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/FlorianBruniaux/claude-code-ultimate-guide" target="_blank">FlorianBruniaux/claude-code-ultimate-guide</a>
+          </div>
+          <div class="course-card__desc">Гид на 22 000 строк с маршрутами для 7 ролей: Junior Dev → CTO. 271 вопрос для самопроверки, 41 диаграмма.</div>
+        </div>
+        <div class="course-card__score-badge">71.1</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--role">PM</span>
+        <span class="tag tag--role">Дизайнеры</span>
+        <span class="tag tag--role">CTO/CIO</span>
+        <span class="tag tag--format">Гид с маршрутами</span>
+      </div>
+      <div class="course-card__why">Единственный ресурс с role-based learning paths. Отдельные доки: for-product-managers.md, for-cio-ceo.md. MCP-сервер для интеграции в сессию. База угроз: 24 CVE + 655 вредоносных skills.</div>
+      <div class="course-card__stats">
+        <span>★ 1 701</span>
+        <span>👥 2</span>
+        <span>📄 CC-BY-SA-4.0</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Маршруты для PM, дизайнеров и CTO — не только для разработчиков</div>
+        <div class="pro">MCP-сервер: гид прямо внутри Claude Code</div>
+        <div class="con">2 контрибьютора — высокий bus factor</div>
+        <div class="con">Нетехнические маршруты — дополнения, не самостоятельные курсы</div>
+      </div>
+    </div>
+
+    <!-- #4 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">04</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/luongnv89/claude-howto" target="_blank">luongnv89/claude-howto</a>
+          </div>
+          <div class="course-card__desc">Визуальный пошаговый guide с copy-paste шаблонами. 11 ступеней, от 30 минут до 3 часов на тему.</div>
+        </div>
+        <div class="course-card__score-badge">70.9</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Гид с прогрессией</span>
+      </div>
+      <div class="course-card__why">Встроенные интерактивные навыки /self-assessment и /lesson-quiz прямо в Claude Code. Поддержка EPUB для офлайн-изучения. Охват полного стека: slash commands → plugins → subagents → MCP → hooks.</div>
+      <div class="course-card__stats">
+        <span>★ 1 089</span>
+        <span>👥 3</span>
+        <span>📝 114 commits/год</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">114 commits/год — один из самых активных</div>
+        <div class="pro">Mermaid-диаграммы и copy-paste шаблоны</div>
+        <div class="con">Универсальный — не ориентирован на конкретную роль</div>
+      </div>
+    </div>
+
+    <!-- #5 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">05</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/shareAI-lab/learn-claude-code" target="_blank">shareAI-lab/learn-claude-code</a>
+          </div>
+          <div class="course-card__desc">«Bash is all you need» — строим мини-агент с нуля за 12 сессий. Самый популярный курс: 30K звёзд.</div>
+        </div>
+        <div class="course-card__score-badge">68.3</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Build-from-scratch</span>
+        <span class="tag tag--lang">Python</span>
+      </div>
+      <div class="course-card__why">12 прогрессивных сессий (s01–s12): The Loop → Planning → Persistence → Teams. Уникальный угол: не «как использовать», а «как устроен Claude Code изнутри». Три языка: EN, 中文, 日本語.</div>
+      <div class="course-card__stats">
+        <span>★ 29 777</span>
+        <span>👥 2</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">30K звёзд — массовое признание</div>
+        <div class="pro">Каждая сессия — работающий Python-пример</div>
+        <div class="con">Только для разработчиков, знающих Python</div>
+      </div>
+    </div>
+
+    <!-- #6 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-copilot">
+      <div class="course-card__header">
+        <div class="course-card__rank">06</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers" target="_blank">microsoft/mastering-github-copilot-for-dotnet-csharp-developers</a>
+          </div>
+          <div class="course-card__desc">GitHub Copilot для C#/.NET: 6 уроков от Microsoft. Переведён на 9 языков.</div>
+        </div>
+        <div class="course-card__score-badge">63.9</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">GitHub Copilot</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Курс с уроками</span>
+        <span class="tag tag--lang">C# / .NET</span>
+      </div>
+      <div class="course-card__why">Единственный курс по Copilot для Microsoft-стека. 6 структурированных уроков: от GitHub basics до мини-игры и деплоя в Azure. 9 языков перевода — уникальная доступность для международных команд.</div>
+      <div class="course-card__stats">
+        <span>★ 350</span>
+        <span>👥 10</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Официальный Microsoft-контент, корпоративно безопасен</div>
+        <div class="pro">9 языков перевода</div>
+        <div class="con">Последний push — октябрь 2025, замедление</div>
+        <div class="con">Только C# / .NET</div>
+      </div>
+    </div>
+
+    <!-- #7 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude tool-copilot tool-cursor">
+      <div class="course-card__header">
+        <div class="course-card__rank">07</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/heilcheng/awesome-agent-skills" target="_blank">heilcheng/awesome-agent-skills</a>
+          </div>
+          <div class="course-card__desc">Кросс-инструментальный каталог: Claude, Codex, Copilot, Gemini, VS Code, Antigravity, Kiro.</div>
+        </div>
+        <div class="course-card__score-badge">63.7</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--tool">Codex</span>
+        <span class="tag tag--tool">Gemini CLI</span>
+        <span class="tag tag--tool">GitHub Copilot</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Awesome-list</span>
+      </div>
+      <div class="course-card__why">Единственный ресурс, покрывающий 8 платформ одновременно. Раздел Official Tutorials and Guides с ссылками на документацию. Таблица совместимости агентов — удобная точка входа.</div>
+      <div class="course-card__stats">
+        <span>★ 3 040</span>
+        <span>👥 26</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Покрывает Claude Code, Codex И Gemini</div>
+        <div class="pro">26 контрибьюторов — устойчивое сообщество</div>
+        <div class="con">Awesome-list, не курс — нет упражнений и прогрессии</div>
+      </div>
+    </div>
+
+    <!-- #8 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">08</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/kousen/claude-code-training" target="_blank">kousen/claude-code-training</a>
+          </div>
+          <div class="course-card__desc">Профессиональный instructor-led training: слайды, 6 лабораторных, конфигурации под мероприятия.</div>
+        </div>
+        <div class="course-card__score-badge">62.8</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Тренинг</span>
+        <span class="tag tag--lang">Java · Python · JS</span>
+      </div>
+      <div class="course-card__why">Единственный формат instructor-led training на GitHub. Ken Kousen — профессиональный тренер. Slidev-слайды, lab_handout.md с 6 прогрессивными лабами, папка events/ для настройки под конкретные мероприятия.</div>
+      <div class="course-card__stats">
+        <span>★ 134</span>
+        <span>👥 1</span>
+        <span>📝 70 commits/год</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Профессиональный формат: слайды + лабы + events</div>
+        <div class="pro">Многоязычные упражнения (Python, JS, Java)</div>
+        <div class="con">1 автор — полная зависимость</div>
+        <div class="con">Уклон в Java/enterprise</div>
+      </div>
+    </div>
+
+    <!-- #9 -->
+    <div class="course-card" data-roles="role-marketing" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">09</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/cc4-marketing/cc4.marketing" target="_blank">cc4-marketing/cc4.marketing</a>
+          </div>
+          <div class="course-card__desc">Claude Code для маркетологов — 16 уроков, ролевой сценарий в вымышленном агентстве.</div>
+        </div>
+        <div class="course-card__score-badge">57.4</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Маркетологи</span>
+        <span class="tag tag--format">Интерактивный курс</span>
+      </div>
+      <div class="course-card__why">Прямой аналог PM-курса для маркетологов. Студент играет роль Marketing Strategist в агентстве Markit: campaign brief, content strategy, competitive analysis, SEO. Плагины с командами /cm:plan, /cf:generate.</div>
+      <div class="course-card__stats">
+        <span>★ 19</span>
+        <span>👥 1</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Единственный курс для маркетологов</div>
+        <div class="pro">Сценарный подход — практически применим</div>
+        <div class="con">19 звёзд — очень ранняя стадия</div>
+      </div>
+    </div>
+
+    <!-- #10 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">10</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know" target="_blank">wesammustafa/Claude-Code-Everything-You-Need-to-Know</a>
+          </div>
+          <div class="course-card__desc">All-in-one справочник: prompt engineering, BMAD method, SDLC, Agent Teams, Opus 4.6.</div>
+        </div>
+        <div class="course-card__score-badge">56.5</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Справочник</span>
+      </div>
+      <div class="course-card__why">Охват BMAD-метода и SDLC-интеграции. Workflow-паттерны: TDD, visual iteration, explore-plan-code-commit. Актуален: 2026 Updates с Opus 4.6, Fast Mode, Agent Teams.</div>
+      <div class="course-card__stats">
+        <span>★ 1 256</span>
+        <span>👥 4</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Охват BMAD-метода — редкость</div>
+        <div class="con">Справочник, не курс — нет упражнений</div>
+      </div>
+    </div>
+
+    <!-- #11 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-claude tool-cursor">
+      <div class="course-card__header">
+        <div class="course-card__rank">11</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/qdleader/Awesome-AI-Pedia" target="_blank">qdleader/Awesome-AI-Pedia</a>
+          </div>
+          <div class="course-card__desc">Claude Code + Cursor knowledge base на китайском. 116 commits/год, самый активный справочник.</div>
+        </div>
+        <div class="course-card__score-badge">55.8</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--tool">Cursor</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Knowledge base</span>
+        <span class="tag tag--lang">中文</span>
+      </div>
+      <div class="course-card__why">Единственный ресурс с реальным контентом по Claude Code И Cursor одновременно. Практические Rules для стеков: Next.js, Vue, Flutter, Spring Boot.</div>
+      <div class="course-card__stats">
+        <span>★ 118</span>
+        <span>👥 2</span>
+        <span>📝 116 commits/год</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Claude Code + Cursor в одном месте</div>
+        <div class="con">Только на китайском языке</div>
+      </div>
+    </div>
+
+    <!-- #12 -->
+    <div class="course-card" data-roles="role-dev" data-tools="tool-cursor tool-claude tool-copilot">
+      <div class="course-card__header">
+        <div class="course-card__rank">12</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/talkpython/agentic-ai-for-python-course" target="_blank">talkpython/agentic-ai-for-python-course</a>
+          </div>
+          <div class="course-card__desc">Talk Python: Cursor + Claude Code + Copilot в одном курсе. 30+ outcomes, companion-репо.</div>
+        </div>
+        <div class="course-card__score-badge">45.4</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">Cursor</span>
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--tool">GitHub Copilot</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--format">Companion к платному</span>
+        <span class="tag tag--lang">Python</span>
+      </div>
+      <div class="course-card__why">Единственный ресурс с Cursor как основным инструментом. Talk Python — устоявшийся бренд. 30+ learning outcomes от настройки до стратегического source control.</div>
+      <div class="course-card__stats">
+        <span>★ 55</span>
+        <span>📄 MIT</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">Cursor как основной инструмент — уникально</div>
+        <div class="con">Companion к платному курсу — лекции по подписке</div>
+      </div>
+    </div>
+
+    <!-- #13 -->
+    <div class="course-card" data-roles="role-dev role-clevel" data-tools="tool-copilot tool-claude">
+      <div class="course-card__header">
+        <div class="course-card__rank">13</div>
+        <div class="course-card__meta">
+          <div class="course-card__name">
+            <a href="https://github.com/danielmeppiel/awesome-ai-native" target="_blank">danielmeppiel/awesome-ai-native</a>
+          </div>
+          <div class="course-card__desc">PROSE-методология: Progressive Disclosure, Reduced Scope, Orchestrated Composition. Installable skill.</div>
+        </div>
+        <div class="course-card__score-badge">42.4</div>
+      </div>
+      <div class="course-card__tags">
+        <span class="tag tag--tool">GitHub Copilot</span>
+        <span class="tag tag--tool">Claude Code</span>
+        <span class="tag tag--role">Разработчики</span>
+        <span class="tag tag--role">Tech Leads</span>
+        <span class="tag tag--format">Методология</span>
+      </div>
+      <div class="course-card__why">Уникальная PROSE-методология для системного AI-разработки. Installable skill для Claude Code и Copilot CLI. Раздел Team Adoption — единственный ресурс про масштабирование AI-инструментов на команду.</div>
+      <div class="course-card__stats">
+        <span>★ 84</span>
+        <span>📝 57 commits/год</span>
+        <span>📄 CC BY-NC-SA 4.0</span>
+      </div>
+      <div class="course-card__pros">
+        <div class="pro">PROSE-фреймворк уникален</div>
+        <div class="pro">Team Adoption для масштабирования</div>
+        <div class="con">84 звезды — ранняя стадия</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end .filterable -->
+
+<!-- Coverage Matrix -->
+<section class="matrix-section">
+  <div class="container">
+    <h2 class="section-title">Покрытие: <span>роли × инструменты</span></h2>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Роль</th>
+            <th>Claude Code</th>
+            <th>GitHub Copilot</th>
+            <th>Cursor</th>
+            <th>Codex</th>
+            <th>Gemini</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Разработчики</td>
+            <td class="has-course">#4 #5 #8 #10</td>
+            <td class="has-course">#1 #6</td>
+            <td class="has-partial">#11 (CN) #12 (платный)</td>
+            <td class="has-partial">#7 (ссылки)</td>
+            <td class="has-partial">#7 (ссылки)</td>
+          </tr>
+          <tr>
+            <td>Продакт-менеджеры</td>
+            <td class="has-course">#2 #3 (маршрут)</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+          </tr>
+          <tr>
+            <td>Маркетологи</td>
+            <td class="has-course">#9</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+          </tr>
+          <tr>
+            <td>Дизайнеры</td>
+            <td class="has-partial">#3 (маршрут)</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+          </tr>
+          <tr>
+            <td>Проджект-менеджеры</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+          </tr>
+          <tr>
+            <td>C-level / менеджмент</td>
+            <td class="has-partial">#3 (CTO/CIO)</td>
+            <td class="has-partial">#13 (team adoption)</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+            <td class="has-none">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color: var(--text-dim); font-size: 13px; margin-top: 16px;">
+      <span style="color: var(--green);">■</span> Структурированный курс &nbsp;
+      <span style="color: var(--yellow);">■</span> Частичное покрытие &nbsp;
+      <span style="color: #333;">■</span> Нет курса
+    </p>
+  </div>
+</section>
+
+<!-- No-license repos -->
+<section class="nolicense-section">
+  <div class="container">
+    <h2 class="section-title">Бонус: <span>11 курсов без лицензии</span></h2>
+    <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">Отклонены из рейтинга автоматически, но могут быть ценны. Отсутствие лицензии часто = платный курс с бесплатным preview на GitHub.</p>
+    <div class="nolicense-grid">
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/carlvellotti/claude-code-everyone-course" target="_blank">claude-code-everyone-course</a></div>
+        <div class="nolicense-card__note">Расширенный PM-курс для широкой аудитории</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/academind/claude-code-course-resources" target="_blank">academind/claude-code-course-resources</a></div>
+        <div class="nolicense-card__note">Academind — известный образовательный бренд</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/iamshaunjp/Claude-Code-Masterclass" target="_blank">iamshaunjp/Claude-Code-Masterclass</a></div>
+        <div class="nolicense-card__note">Net Ninja — Masterclass формат</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/ghuntley/how-to-build-a-coding-agent" target="_blank">ghuntley/how-to-build-a-coding-agent</a></div>
+        <div class="nolicense-card__note">5 283 ★ — строим coding agent</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/datawhalechina/easy-vibe" target="_blank">datawhalechina/easy-vibe</a></div>
+        <div class="nolicense-card__note">3 957 ★ — DataWhale, vibe coding (中文)</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/koki7o/claude-code-for-beginners" target="_blank">koki7o/claude-code-for-beginners</a></div>
+        <div class="nolicense-card__note">Курс для начинающих</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/emarco177/claude-code-crash-course" target="_blank">emarco177/claude-code-crash-course</a></div>
+        <div class="nolicense-card__note">Crash course формат</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/boringmarketer/guides" target="_blank">boringmarketer/guides</a></div>
+        <div class="nolicense-card__note">Гиды для маркетологов — потенциально ценен</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/theaiautomators/claude-code-agentic-rag-masterclass" target="_blank">theaiautomators/agentic-rag-masterclass</a></div>
+        <div class="nolicense-card__note">RAG + Claude Code специализация</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/goker/vibe-coding-101-for-software-engineers" target="_blank">goker/vibe-coding-101</a></div>
+        <div class="nolicense-card__note">Vibe coding для инженеров</div>
+      </div>
+      <div class="nolicense-card">
+        <div class="nolicense-card__name"><a href="https://github.com/MarkShawn2020/DeepLearning.ai-Courses-ClaudeCode" target="_blank">DeepLearning.ai-Courses-ClaudeCode</a></div>
+        <div class="nolicense-card__note">Связан с DeepLearning.ai курсами</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Landscape insights -->
+<section class="landscape-section">
+  <div class="container">
+    <h2 class="section-title">Что <span>важно знать</span></h2>
+    <div class="landscape-grid">
+      <div class="insight-card">
+        <div class="insight-card__title">Claude Code доминирует</div>
+        <div class="insight-card__text">9 из 13 курсов — про Claude Code. GitHub Copilot представлен двумя курсами от Microsoft. Cursor, Codex, Gemini — ноль структурированных курсов.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card__title">PM-курс задал формат</div>
+        <div class="insight-card__text">Интерактивные slash-команды как уроки, ролевой контекст, прогрессия модулей. Уже реплицирован для маркетологов. Формат воспроизводим для других ролей.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card__title">Дефицит для нетехнических ролей</div>
+        <div class="insight-card__text">Дизайнеры, проджект-менеджеры, аналитики, HR — без покрытия. Нетехнические роли обслуживаются только 3 ресурсами из 13.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card__title">Проджект-менеджеры — ноль</div>
+        <div class="insight-card__text">Ни одного курса для проджект-менеджеров ни по одному инструменту. Полностью пустая ячейка в матрице покрытия.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card__title">Корпоративное обучение — пусто</div>
+        <div class="insight-card__text">Только 1 repo (kousen) в формате instructor-led training. B2B/корпоративный образовательный сегмент не освоен.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card__title">11 курсов без лицензии</div>
+        <div class="insight-card__text">54% найденных курсов не имеют OSS-лицензии. Это коррелирует с монетизацией: платные курсы с бесплатным GitHub-preview.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p style="margin-bottom: 8px;"><strong style="color: var(--red);">red_mad_robot</strong> · Подборка AI-курсов для команды</p>
+    <p>Данные: <a href="https://github.com" target="_blank">GitHub Search API</a> · Скан: 17 марта 2026 · 39 репозиториев проверено</p>
+  </div>
+</footer>
+
+
+</body>
+</html>
